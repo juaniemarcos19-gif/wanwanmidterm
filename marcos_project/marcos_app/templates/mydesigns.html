@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juanie Jamila Marcos | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --ocean-bg: #111d35;
+            --ocean-cool: #1a2c4e;
+            --neon-blue: #38bdf8;
+            --light-wave: #7dd3fc;
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background-color: var(--ocean-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            background: rgba(17, 29, 53, 0.85);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo { font-size: 22px; font-weight: 800; color: white; }
+        .logo span { color: var(--neon-blue); }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--text-sub); font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--neon-blue); }
+
+        /* --- SECTIONS --- */
+        section { padding: 90px 10% 70px; }
+        .section-title { font-size: 38px; margin-bottom: 60px; text-align: center; font-weight: 800; color: white; }
+
+        /* --- HERO --- */
+        .hero { display: flex; align-items: center; justify-content: space-between; min-height: 85vh; gap: 50px; }
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-size: 58px; line-height: 1.1; margin-bottom: 20px; font-weight: 800; color: white; }
+        .about-box { background: rgba(26, 44, 78, 0.9); padding: 35px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.03); line-height: 1.8; color: #cbd5e1; }
+
+        .hero-img-wrapper { position: relative; width: 400px; height: 400px; display: flex; align-items: center; justify-content: center; }
+        .hero-img { width: 300px; height: 300px; border-radius: 50%; overflow: hidden; border: 6px solid var(--neon-blue); z-index: 5; }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .wave-layer { position: absolute; width: 300px; height: 300px; border-radius: 50%; border: 2px solid var(--light-wave); opacity: 0; animation: cleanWave 8s ease-out infinite; }
+        @keyframes cleanWave { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.7); opacity: 0; } }
+
+        /* --- EDUCATION --- */
+        .timeline { max-width: 850px; margin: 0 auto; }
+        .timeline-item { background: var(--ocean-cool); padding: 25px 30px; border-radius: 20px; margin-bottom: 20px; border-left: 5px solid var(--neon-blue); }
+        .year { color: var(--neon-blue); font-weight: 800; display: block; margin-bottom: 5px; }
+        .school-name { font-size: 0.9rem; color: var(--text-sub); display: block; margin-top: 5px; font-style: italic; }
+
+        /* --- SKILLS & CERTIFICATES --- */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 30px;
+            background: var(--ocean-cool);
+            padding: 40px;
+            border-radius: 30px;
+        }
+
+        .skill-bar { width: 100%; margin-bottom: 22px; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 9px; color: white; font-weight: 600; }
+        .progress-bg { background: rgba(255,255,255,0.06); height: 8px; border-radius: 10px; }
+        .progress-fill { background: linear-gradient(90deg, #38bdf8, #818cf8); height: 100%; border-radius: 10px; }
+
+        .cert-section-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--neon-blue);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+            opacity: 0.8;
+        }
+
+        .cert-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            justify-content: flex-start;
+        }
+        .cert-card {
+            width: 100%;
+            height: 90px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            transition: var(--transition);
+            position: relative;
+        }
+        .cert-card img { width: 100%; height: 100%; object-fit: cover; }
+        .cert-card:hover { transform: translateX(-5px); border-color: var(--neon-blue); }
+        .cert-card::after {
+            content: "View Certificate";
+            position: absolute;
+            inset: 0;
+            background: rgba(17, 29, 53, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--neon-blue);
+        }
+        .cert-card:hover::after { opacity: 1; }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; z-index: 2000; inset: 0; background: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { max-width: 90%; max-height: 90%; border-radius: 8px; border: 2px solid var(--neon-blue); }
+        .close-modal { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+
+        /* --- HOBBIES --- */
+        .hobbies-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 18px; }
+        .hobby-card { background: var(--ocean-cool); padding: 25px; border-radius: 24px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.03); transition: var(--transition); }
+        .hobby-card:hover { transform: translateY(-5px); border-color: var(--neon-blue); }
+        .hobby-card i { font-size: 28px; color: var(--neon-blue); margin-bottom: 12px; display: block; }
+
+        /* --- CONTACT --- */
+        .contact-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .contact-item { background: var(--ocean-cool); width: 110px; padding: 20px; border-radius: 20px; text-decoration: none; color: white; text-align: center; transition: var(--transition); }
+        .contact-item:hover { background: var(--neon-blue); color: #111d35; transform: translateY(-5px); }
+
+        footer { background: #0a1121; color: var(--text-sub); padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        @media (max-width: 900px) {
+            .hero { flex-direction: column-reverse; text-align: center; }
+            .skills-container { grid-template-columns: 1fr; }
+            .cert-gallery { flex-direction: row; flex-wrap: wrap; }
+            .cert-card { width: calc(50% - 6px); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><span>J</span>uanie <span>J</span>amila <span>M</span>arcos</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#hobbies">Hobbies</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text">
+            <span style="color: var(--neon-blue); letter-spacing: 3px; font-weight: 600; font-size: 14px;">CS STUDENT</span>
+            <h1>Juanie Jamila Marcos</h1>
+            <div class="about-box">
+                <p>Hi, my name is <strong>Juanie Jamila Marcos</strong>. I am 22 years old, standing 5'4" and weighing 45kg. As a dedicated Computer Science student, I have developed a strong passion for programming and logical problem-solving.</p>
+            </div>
+        </div>
+        <div class="hero-img-wrapper">
+            <div class="wave-layer" style="animation-delay: 0s"></div>
+            <div class="wave-layer" style="animation-delay: 2s"></div>
+            <div class="hero-img">
+                <img src="{% static 'image/wanwan.jpg' %}" alt="Juanie Profile">
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="year">2023 - Present</span>
+                <h3>Tertiary</h3>
+                <p>BS Computer Science</p>
+                <span class="school-name">Bayawan-Sta. Catalina, Negros Oriental, Philippines</span>
+            </div>
+            <div class="timeline-item">
+                <span class="year">2021 - 2023</span>
+                <h3>Senior High School</h3>
+                <p>Humanities and Social Sciences (HUMSS)</p>
+                <span class="school-name">Casiano Zamora Napigkit National High School</span>
+            </div>
+            <div class="timeline-item">
+                <span class="year">2017 - 2021</span>
+                <h3>Junior High School</h3>
+                <p>Casiano Zamora Napigkit National High School</p>
+                <span class="school-name">Secondary Education</span>
+            </div>
+            <div class="timeline-item">
+                <span class="year">2012 - 2017</span>
+                <h3>Elementary</h3>
+                <p>San Vicente Elementary School</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Technical Proficiency</h2>
+        <div class="skills-container">
+            <div class="skills-list">
+                <div class="skill-bar">
+                    <div class="skill-info"><span>Python</span><span>85%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info"><span>C++</span><span>80%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info"><span>Graphic Design</span><span>90%</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 90%;"></div></div>
+                </div>
+            </div>
+
+            <div class="cert-wrapper">
+                <span class="cert-section-label">Certificates</span>
+                <div class="cert-gallery">
+                    <div class="cert-card" onclick="openModal(this)">
+                        <img src="{% static 'certificate/pythonwan.jpeg' %}" alt="Python Certificate">
+                    </div>
+                    <div class="cert-card" onclick="openModal(this)">
+                        <img src="{% static 'certificate/seminarwan.jpeg' %}" alt="Seminar Certificate">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="certModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="imgFull">
+    </div>
+
+    <section id="hobbies">
+        <h2 class="section-title">Hobbies</h2>
+        <div class="hobbies-grid">
+            <div class="hobby-card"><i class="fas fa-swimmer"></i><h4>Swimming</h4></div>
+            <div class="hobby-card"><i class="fas fa-plane"></i><h4>Travel</h4></div>
+            <div class="hobby-card"><i class="fas fa-utensils"></i><h4>Eating</h4></div>
+            <div class="hobby-card"><i class="fas fa-bed"></i><h4>Sleeping</h4></div>
+            <div class="hobby-card"><i class="fas fa-book"></i><h4>Reading</h4></div>
+            <div class="hobby-card"><i class="fas fa-film"></i><h4>Watching</h4></div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Connect</h2>
+        <div class="contact-container">
+            <a href="mailto:marcosjuanie362@gmail.com" class="contact-item"><i class="fas fa-envelope"></i><span>Email</span></a>
+            <a href="https://www.facebook.com/kyutt.wanny" target="_blank" class="contact-item"><i class="fab fa-facebook"></i><span>Facebook</span></a>
+            <a href="https://www.linkedin.com/in/lakysha-mae-a484603b5?..." target="_blank" class="contact-item"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+            <a href="https://www.tiktok.com/@itswan234?..." target="_blank" class="contact-item"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
+            <a href="#" class="contact-item"><i class="fab fa-github"></i><span>GitHub</span></a>
+        </div>
+    </section>
+
+    <footer>
+        <p style="font-weight: 800; color: white;">Juanie Jamila Marcos</p>
+        <p>&copy; 2026. Student Portfolio.</p>
+    </footer>
+
+    <script>
+        function openModal(element) {
+            const modal = document.getElementById("certModal");
+            const modalImg = document.getElementById("imgFull");
+            modal.style.display = "flex";
+            modalImg.src = element.getElementsByTagName('img')[0].src;
+        }
+        function closeModal() {
+            document.getElementById("certModal").style.display = "none";
+        }
+        window.onclick = function(event) {
+            const modal = document.getElementById("certModal");
+            if (event.target == modal) { closeModal(); }
+        }
+    </script>
+
+</body>
+</html>
